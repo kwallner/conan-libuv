@@ -18,6 +18,7 @@ class LibuvConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = "shared=False"
     root = name + "-" + version
+    build_requires = "gyp_installer/20171101@bincrafters/stable", "ninja_installer/1.8.2@bincrafters/stable"
 
     def configure(self):
         del self.settings.compiler.libcxx
@@ -68,3 +69,4 @@ class LibuvConan(ConanFile):
             self.cpp_info.libs = tools.collect_libs(self)
         if self.settings.os == "Linux":
             self.cpp_info.libs.append("pthread")
+        self.cpp_info.libs = [ "libuv" ]
